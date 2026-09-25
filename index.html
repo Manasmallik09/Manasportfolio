@@ -1,52 +1,496 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#040a11"><meta name="description" content="Manas Mallik — Mechanical Design Engineer focused on CAD, assembly, FEA, CFD, DSE, DFMEA and DFM.">
-<meta property="og:title" content="Manas Mallik | Mechanical Design Engineer"><meta property="og:description" content="Design, assembly, simulation and manufacturing portfolio."><meta property="og:type" content="website">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
-<title>Manas Mallik | Mechanical Design Engineer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manas Mallik | Mechanical & Structural Design Engineer</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<a class="skip-link" href="#main-content">Skip to content</a>
-<aside class="sidebar" aria-label="Primary navigation"><a class="mark" href="#home" aria-label="Manas Mallik home">MM</a><nav class="side-nav">
-<a class="active" href="#home"><span>⌂</span>Home</a><a href="#about"><span>◎</span>About</a><a href="#skills"><span>◈</span>Skills</a><a href="#projects"><span>▣</span>Projects</a><a href="#analysis"><span>∿</span>Analysis</a><a href="#experience"><span>◷</span>Journey</a><a href="#achievements"><span>★</span>Credentials</a><a href="#contact"><span>✉</span>Contact</a>
-</nav><div class="side-foot">MECHANICAL • DESIGN • ANALYSIS</div></aside>
-<div class="main" id="main-content">
-<header class="topbar"><div class="brandline">MANAS MALLIK <em>/ MECHANICAL DESIGN ENGINEER</em></div><nav class="top-links" aria-label="Engineering areas"><a href="#projects">Design</a><a href="#projects">Assembly</a><a href="#analysis">FEA / CFD</a><a href="#analysis">DSE</a><a href="#about">DFMEA / DFM</a></nav><a class="btn" href="mailto:manasmallik406@gmail.com">Contact</a></header>
-<main>
-<section class="container hero" id="home"><div class="reveal"><div class="eyebrow">DESIGN / ANALYSE / VALIDATE / MANUFACTURE</div><h1>MANAS <span>MALLIK</span></h1><h2>Mechanical Design Engineer</h2><p class="hero-copy">Turning engineering concepts into manufacturable solutions through <strong>CAD, assemblies, FEA, CFD, DSE, DFMEA and DFM</strong>.</p><div class="hero-actions"><a class="btn primary" href="#projects">Explore My Work →</a><a class="btn" href="#analysis">View Analysis ↗</a><a class="btn" href="resume.pdf" download>Download CV ↓</a></div><div class="metrics"><div class="metric"><strong>1+</strong><small>YEAR PROFESSIONAL EXPERIENCE</small></div><div class="metric"><strong>3+</strong><small>MAJOR ENGINEERING PROJECTS</small></div><div class="metric"><strong>AIR 1</strong><small>SAE DDC BEST DESIGN REPORT</small></div></div></div>
-<div class="hero-visual reveal" aria-label="Abstract mechanical engineering visualization"><div class="hud-corner hud-tl">MM / 01<br><span>CAD SYSTEM ONLINE</span></div><div class="hud-corner hud-tr">REV. 2026<br><span>DESIGN REVIEW</span></div><div class="machine"><div class="scan"></div><div class="outer"></div><div class="housing"></div><div class="shaft"></div><div class="rotor"></div></div><div class="callout fea"><b>FEA</b><span>Structural / Stress / Validation</span><div class="mini-map"></div></div><div class="callout cfd"><b>CFD</b><span>Flow / Pressure / Thermal</span><div class="mini-map"></div></div><div class="callout dfmea"><b>DFMEA</b><span>Risk / Failure / Mitigation</span></div></div></section>
+<body class="bg-[#05080f] text-slate-200 font-mono relative overflow-x-hidden">
 
-<section class="container section reveal" id="about"><div class="section-head"><div><div class="kicker">ENGINEERING PROFILE</div><h2>Design with analysis built in.</h2></div><p>A workflow connecting geometry, assembly intent, manufacturability and simulation — from concept to prototype and validation.</p></div><div class="profile-grid">
-<article class="profile-card"><div class="num">01</div><h3>Design & CAD</h3><p>3D parametric modeling, sheet metal, plastic, drafting and GD&T.</p></article><article class="profile-card"><div class="num">02</div><h3>Assembly</h3><p>Complex assemblies, mechanical packaging, BOMs and prototype validation.</p></article><article class="profile-card"><div class="num">03</div><h3>FEA</h3><p>Basic FEA and structural validation with engineering-driven interpretation.</p></article><article class="profile-card"><div class="num">04</div><h3>CFD</h3><p>ANSYS Fluent experience covering flow and pressure-profile analysis.</p></article><article class="profile-card"><div class="num">05</div><h3>DFMEA / DFM</h3><p>Failure-mode thinking, manufacturability, tolerances and process planning.</p></article>
-</div></section>
+  <!-- HUD Grid Overlay -->
+  <div class="hud-grid fixed inset-0 pointer-events-none z-0"></div>
 
-<section class="container section reveal" id="skills"><div class="section-head"><div><div class="kicker">ENGINEERING TOOLBOX</div><h2>Technical stack</h2></div><p>Tools and methods represented in my engineering profile.</p></div><div class="tools">
-<div class="tool"><div class="tool-icon">▣</div><strong>SolidWorks</strong><small>Advanced CAD / Motion / Drawings</small></div><div class="tool"><div class="tool-icon">⬡</div><strong>Fusion 360</strong><small>Parametric / Sheet Metal</small></div><div class="tool"><div class="tool-icon">◫</div><strong>Creo</strong><small>Part / Mold Design</small></div><div class="tool"><div class="tool-icon">A</div><strong>AutoCAD</strong><small>2D Engineering Drawings</small></div><div class="tool"><div class="tool-icon">∿</div><strong>ANSYS</strong><small>Fluent / Basic FEA</small></div><div class="tool"><div class="tool-icon">△</div><strong>MATLAB</strong><small>Simulink / Modeling</small></div>
-</div></section>
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 bg-[#05080f]/90 backdrop-blur-md border-b border-cyan-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 border border-amber-500/80 bg-amber-500/10 flex items-center justify-center font-bold text-amber-400 text-xl tracking-wider">
+          MM
+        </div>
+        <div>
+          <h1 class="text-sm font-bold text-slate-100 tracking-wider">MANAS MALLIK</h1>
+          <p class="text-[10px] text-cyan-400 tracking-widest uppercase">Mechanical & Structural Engineer</p>
+        </div>
+      </div>
 
-<section class="container section reveal" id="projects"><div class="section-head"><div><div class="kicker">SELECTED WORK</div><h2>Projects & engineering cases</h2></div><p>Case cards connect design decisions to assembly, analysis and manufacturing.</p></div><div class="projects">
-<article class="project"><div class="project-visual"><div class="cad-object"></div><div class="flow-field"></div></div><div class="project-body"><div class="tags"><span class="tag">DESIGN</span><span class="tag">ASSEMBLY</span><span class="tag">DFM</span></div><h3>UAV — Mechanical Packaging</h3><p>Structural assemblies and sheet-metal enclosures for defence-grade UAV systems, including drawings, BOM and manufacturing packages.</p><button class="btn" data-project="uav">Open case →</button></div></article>
-<article class="project"><div class="project-visual"><div class="cad-object"></div><div class="thermal"></div><div class="flow-field"></div></div><div class="project-body"><div class="tags"><span class="tag">CAD</span><span class="tag">FEA</span><span class="tag">CFD</span></div><h3>SAE DDC 2025 — Fixed-Wing UAV</h3><p>SolidWorks system architecture, rapid prototyping, assembly validation, material selection and FEA-based analysis.</p><button class="btn" data-project="sae">Open case →</button></div></article>
-<article class="project"><div class="project-visual"><div class="cad-object"></div><div class="thermal"></div></div><div class="project-body"><div class="tags"><span class="tag">CREO</span><span class="tag">DFMEA</span><span class="tag">MANUFACTURING</span></div><h3>Plastic Injection Hand Mold</h3><p>Creo mold modeling/simulation, production drawings, CNC toolpaths, DFMEA and process-flow documentation.</p><button class="btn" data-project="mold">Open case →</button></div></article>
-<article class="project"><div class="project-visual"><div class="cad-object"></div><div class="flow-field"></div></div><div class="project-body"><div class="tags"><span class="tag">DRDO</span><span class="tag">CFD</span></div><h3>Supersonic Pressure Analysis</h3><p>3D modeling, supersonic shockwave pressure distributions and analytical validation during DRDO training.</p><button class="btn" data-project="drdo">Open case →</button></div></article>
-<article class="project"><div class="project-visual"><div class="cad-object"></div></div><div class="project-body"><div class="tags"><span class="tag">INDUSTRIAL</span><span class="tag">SIX SIGMA</span></div><h3>NALCO — Plant Machinery</h3><p>Heavy-industrial plant machinery layouts, troubleshooting and workflow-efficiency study.</p><button class="btn" data-project="nalco">Open case →</button></div></article>
-</div></section>
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-6 text-xs text-slate-400">
+        <a href="#hero" class="hover:text-amber-400 transition-colors uppercase tracking-wider">[00] Telemetry</a>
+        <a href="#projects" class="hover:text-amber-400 transition-colors uppercase tracking-wider">[01] Projects</a>
+        <a href="#skills" class="hover:text-amber-400 transition-colors uppercase tracking-wider">[02] Software</a>
+        <a href="#workflow" class="hover:text-amber-400 transition-colors uppercase tracking-wider">[03] Workflow</a>
+        <a href="#experience" class="hover:text-amber-400 transition-colors uppercase tracking-wider">[04] Dossier</a>
+      </nav>
 
-<section class="container section reveal" id="analysis"><div class="section-head"><div><div class="kicker">ANALYSIS WORKFLOW</div><h2>FEA + CFD + DSE</h2></div><p>Define → model → simulate → interpret → iterate. The bars below represent the sequence of an analysis workflow, not simulation results or performance scores.</p></div><div class="analysis-grid">
-<article class="analysis-card"><div class="kicker">FEA / STRUCTURAL</div><h3>Design validation loop</h3><div class="progress-row"><b>Geometry & constraints</b><span>PHASE 01</span></div><div class="progress"><i style="width:100%"></i></div><div class="progress-row"><b>Mesh / loads</b><span>PHASE 02</span></div><div class="progress"><i style="width:100%"></i></div><div class="progress-row"><b>Stress / deformation</b><span>PHASE 03</span></div><div class="progress"><i style="width:100%"></i></div><div class="progress-row"><b>Design iteration</b><span>PHASE 04</span></div><div class="progress"><i style="width:100%"></i></div></article>
-<article class="analysis-card"><div class="kicker">CFD / FLOW</div><h3>Flow-analysis mindset</h3><div class="progress-row"><b>Geometry / flow domain</b><span>PHASE 01</span></div><div class="progress"><i style="width:100%"></i></div><div class="progress-row"><b>Boundary conditions</b><span>PHASE 02</span></div><div class="progress"><i style="width:100%"></i></div><div class="progress-row"><b>Velocity / pressure field</b><span>PHASE 03</span></div><div class="progress"><i style="width:100%"></i></div><div class="progress-row"><b>Engineering interpretation</b><span>PHASE 04</span></div><div class="progress"><i style="width:100%"></i></div></article>
-</div></section>
+      <div class="flex items-center space-x-3">
+        <a href="#contact" class="px-3 py-1.5 border border-cyan-500/50 bg-cyan-950/30 text-cyan-400 text-xs hover:border-cyan-400 hover:bg-cyan-500/10 transition-all flex items-center gap-1.5">
+          <i data-lucide="terminal" class="w-3.5 h-3.5"></i> Contact
+        </a>
+      </div>
+    </div>
+  </header>
 
-<section class="container section reveal" id="experience"><div class="section-head"><div><div class="kicker">JOURNEY</div><h2>Experience & training</h2></div></div><div class="timeline"><article class="timeline-card"><div class="year">2023</div><h3>NALCO</h3><p>Industrial Trainee<br>Angul, Odisha</p></article><article class="timeline-card"><div class="year">2024</div><h3>DRDO</h3><p>Summer Intern<br>Chandipur, Odisha</p></article><article class="timeline-card"><div class="year">2024 — PRESENT</div><h3>IG Defence</h3><p>Engineer 1 — Mechanical Design<br>Delhi, India</p></article><article class="timeline-card"><div class="year">2026</div><h3>VSSUT</h3><p>B.Tech Mechanical Engineering<br>GPA 8.02</p></article></div></section>
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
 
-<section class="container section reveal" id="achievements"><div class="section-head"><div><div class="kicker">CREDENTIALS</div><h2>Achievements & certifications</h2></div></div><div class="awards"><article class="award"><strong>AIR 1</strong><p>Best Design Report — SAEISS DDC 2025, Team Aerotech.</p><span class="tag">NATIONAL DESIGN COMPETITION</span></article><article class="award"><strong>SolidWorks</strong><p>Industrial Certification — CTTC Bhubaneswar.</p><span class="tag">CAD</span></article><article class="award"><strong>ANSYS Fluent</strong><p>Virtual Internship — AICTE.</p><span class="tag">CFD</span></article><article class="award"><strong>CNC Toolpath</strong><p>Programming — World Steel Association.</p><span class="tag">MANUFACTURING</span></article></div></section>
+    <!-- HERO SECTION: Option 4e (Kinetic HUD Simulation) + 4f (Technical Print Banner) -->
+    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      
+      <!-- Left Column: Dossier Header & Specs -->
+      <div class="lg:col-span-5 bg-[#090d16] border border-cyan-900/60 p-6 flex flex-col justify-between relative shadow-2xl">
+        <div class="absolute top-0 right-0 bg-amber-500/20 border-b border-l border-amber-500/40 px-2 py-0.5 text-[9px] text-amber-400 font-bold uppercase tracking-widest">
+          SPECIFICATION // CLASS-1 STRUCTURAL
+        </div>
 
-<section class="container section reveal" id="contact"><div class="contact"><div><div class="kicker">LET'S BUILD</div><h2>Design. Analyse. Improve.</h2><p>Open to mechanical design, CAD, analysis and engineering opportunities.</p></div><div class="contact-actions"><a class="btn primary" href="mailto:manasmallik406@gmail.com">Get in touch →</a><a class="btn" href="https://www.linkedin.com/in/manas-mallik-308767263" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn" href="resume.pdf" download>CV ↓</a></div></div></section>
-</main>
-<footer class="container footer"><span>© <span data-year></span> Manas Mallik</span><span>CAD · Assembly · FEA · CFD · DSE · DFMEA · DFM</span></footer>
-</div>
-<div class="modal" id="project-modal" aria-hidden="true"><div class="modal-card" id="modal-body" role="dialog" aria-modal="true" aria-labelledby="modal-title"></div></div>
-<script src="script.js" defer></script>
-</body></html>
+        <div>
+          <div class="text-[11px] text-amber-400 font-semibold uppercase tracking-widest mb-1 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            Mechanical & Structural Systems
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight leading-none mb-3">
+            Manas <span class="text-amber-400">Mallik</span>
+          </h2>
+
+          <p class="text-xs text-cyan-300 font-mono mb-4 border-l-2 border-cyan-500 pl-3 py-1 bg-cyan-950/20">
+            Aerospace, UAV Airframes & Architectural Structures
+          </p>
+
+          <p class="text-xs text-slate-400 leading-relaxed mb-6">
+            Multi-physics analysis expert specializing in non-linear FEA, compressible CFD, DFM/DFMA, and DFMEA. Bridging high-precision mechanical aerospace engineering with architectural structural design.
+          </p>
+
+          <!-- Engineering Badges -->
+          <div class="grid grid-cols-2 gap-2 mb-6">
+            <div class="border border-slate-800 bg-slate-900/50 p-2">
+              <span class="text-[9px] text-slate-500 block uppercase">FEA Solvers</span>
+              <span class="text-xs text-cyan-300 font-semibold">Abaqus / ANSYS / Midas</span>
+            </div>
+            <div class="border border-slate-800 bg-slate-900/50 p-2">
+              <span class="text-[9px] text-slate-500 block uppercase">CFD Solvers</span>
+              <span class="text-xs text-cyan-300 font-semibold">Fluent / OpenFOAM</span>
+            </div>
+            <div class="border border-slate-800 bg-slate-900/50 p-2">
+              <span class="text-[9px] text-slate-500 block uppercase">Methodologies</span>
+              <span class="text-xs text-amber-300 font-semibold">DFM / DFMA / DFMEA</span>
+            </div>
+            <div class="border border-slate-800 bg-slate-900/50 p-2">
+              <span class="text-[9px] text-slate-500 block uppercase">Architectural</span>
+              <span class="text-xs text-amber-300 font-semibold">Revit / Wind Load / Facades</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric HUD Counters -->
+        <div class="grid grid-cols-4 gap-2 border-t border-slate-800 pt-4 text-center">
+          <div>
+            <div class="text-lg font-bold text-amber-400">2+</div>
+            <div class="text-[9px] text-slate-500 uppercase">Years Exp.</div>
+          </div>
+          <div>
+            <div class="text-lg font-bold text-cyan-400">5+</div>
+            <div class="text-[9px] text-slate-500 uppercase">Major Projects</div>
+          </div>
+          <div>
+            <div class="text-lg font-bold text-amber-400">AIR 1</div>
+            <div class="text-[9px] text-slate-500 uppercase">SAE DDC '25</div>
+          </div>
+          <div>
+            <div class="text-lg font-bold text-cyan-400">DFMEA</div>
+            <div class="text-[9px] text-slate-500 uppercase">Certified</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Kinetic HUD Simulation Display -->
+      <div class="lg:col-span-7 bg-[#080d1a] border border-cyan-800/80 p-5 relative overflow-hidden flex flex-col justify-between shadow-2xl">
+        
+        <!-- Top HUD Telemetry Bar -->
+        <div class="flex items-center justify-between border-b border-cyan-900/60 pb-3 z-10">
+          <div class="flex items-center space-x-3 text-[10px]">
+            <span class="text-cyan-400 font-bold flex items-center gap-1">
+              <i data-lucide="activity" class="w-3.5 h-3.5 text-cyan-400"></i> HUD SOLVER ACTIVE
+            </span>
+            <span class="text-slate-500">|</span>
+            <span class="text-slate-400" id="current-solver">SOLVER: ANSYS Fluent (CFD)</span>
+          </div>
+
+          <div class="flex space-x-1">
+            <button onclick="setSimMode('cfd')" id="btn-cfd" class="sim-tab-btn active text-[10px] px-2.5 py-1 border border-cyan-500 bg-cyan-500/20 text-cyan-300">
+              CFD Velocity
+            </button>
+            <button onclick="setSimMode('fea')" id="btn-fea" class="sim-tab-btn text-[10px] px-2.5 py-1 border border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-200">
+              FEA von Mises
+            </button>
+            <button onclick="setSimMode('cad')" id="btn-cad" class="sim-tab-btn text-[10px] px-2.5 py-1 border border-slate-700 bg-slate-900 text-slate-400 hover:text-slate-200">
+              CAD Wireframe
+            </button>
+          </div>
+        </div>
+
+        <!-- Center Viewport: Interactive Jet Engine / Turbine Blueprint with Photo Uploader -->
+        <div class="relative my-4 flex-grow min-h-[320px] flex items-center justify-center">
+          
+          <!-- Interactive SVG Turbine Simulation -->
+          <svg id="kinetic-sim-svg" class="w-full h-full max-h-[360px]" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Thermal Multi-color Gradient (CFD Flow) -->
+              <linearGradient id="cfdGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8"/>
+                <stop offset="30%" stop-color="#06b6d4" stop-opacity="0.9"/>
+                <stop offset="55%" stop-color="#22c55e" stop-opacity="0.9"/>
+                <stop offset="75%" stop-color="#eab308" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#ef4444" stop-opacity="1"/>
+              </linearGradient>
+
+              <!-- Von Mises FEA Stress Gradient -->
+              <linearGradient id="feaGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.9"/>
+                <stop offset="25%" stop-color="#312e81" stop-opacity="0.9"/>
+                <stop offset="50%" stop-color="#0284c7" stop-opacity="0.9"/>
+                <stop offset="75%" stop-color="#eab308" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#dc2626" stop-opacity="1"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Background Grid Lines -->
+            <path d="M0 100 H800 M0 200 H800 M0 300 H800 M200 0 V400 M400 0 V400 M600 0 V400" stroke="#0e2a47" stroke-width="0.8" stroke-dasharray="4 4"/>
+
+            <!-- Turbine Core Mechanics -->
+            <g id="turbine-assembly" class="transition-all duration-700">
+              <!-- Engine Casing -->
+              <path d="M 120 120 L 280 100 L 520 130 L 680 150 L 680 250 L 520 270 L 280 300 L 120 280 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
+              
+              <!-- CFD Pressure / Velocity Flow Streams (Gradient Filled) -->
+              <path id="sim-flow-1" class="transition-opacity duration-500" d="M 50 200 C 180 120, 320 110, 500 160 C 620 190, 700 170, 760 200 C 700 230, 620 210, 500 240 C 320 290, 180 280, 50 200 Z" fill="url(#cfdGradient)" opacity="0.85"/>
+              
+              <path id="sim-flow-2" class="transition-opacity duration-500" d="M 140 160 C 260 140, 420 150, 550 180 C 650 200, 720 190, 750 200 C 720 210, 650 200, 550 220 C 420 250, 260 260, 140 240 Z" fill="url(#feaGradient)" opacity="0"/>
+
+              <!-- Rotating Blade Discs -->
+              <g class="animate-spin-slow origin-[300px_200px]">
+                <circle cx="300" cy="200" r="75" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="8 6" fill="none"/>
+                <line x1="300" y1="125" x2="300" y2="275" stroke="#f59e0b" stroke-width="1"/>
+                <line x1="225" y1="200" x2="375" y2="200" stroke="#f59e0b" stroke-width="1"/>
+              </g>
+
+              <g class="animate-spin-fast origin-[480px_200px]">
+                <circle cx="480" cy="200" r="55" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6 4" fill="none"/>
+                <line x1="480" y1="145" x2="480" y2="255" stroke="#38bdf8" stroke-width="1"/>
+                <line x1="425" y1="200" x2="535" y2="200" stroke="#38bdf8" stroke-width="1"/>
+              </g>
+            </g>
+
+            <!-- Vector Probes and Node Callouts -->
+            <g font-family="monospace" font-size="10" fill="#38bdf8">
+              <text x="130" y="90">P[inlet]: 1.01 Bar</text>
+              <line x1="160" y1="95" x2="180" y2="120" stroke="#38bdf8" stroke-width="0.8"/>
+
+              <text x="450" y="90" fill="#f59e0b">T[max]: 841°C [CRITICAL]</text>
+              <line x1="480" y1="95" x2="480" y2="135" stroke="#f59e0b" stroke-width="0.8"/>
+
+              <text x="660" y="310" fill="#ef4444">σ[vM]: 342 MPa</text>
+              <line x1="680" y1="295" x2="650" y2="260" stroke="#ef4444" stroke-width="0.8"/>
+            </g>
+          </svg>
+
+          <!-- Editable Photo Component (Overlaid Blueprint Photo Container) -->
+          <div class="absolute bottom-2 left-2 z-20 border border-amber-500/80 bg-[#05080f]/90 p-2 rounded shadow-lg max-w-[200px]">
+            <div class="text-[9px] text-amber-400 font-bold uppercase mb-1 flex items-center justify-between">
+              <span>PROPORTIONAL CAD PHOTO</span>
+              <label for="photo-upload" class="cursor-pointer text-cyan-400 hover:underline text-[8px]">[EDIT]</label>
+            </div>
+            
+            <div class="relative w-28 h-28 border border-dashed border-cyan-700 bg-slate-950 flex items-center justify-center overflow-hidden group">
+              <img id="profile-photo" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=300&q=80" alt="Mechanical Engineer Render" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-opacity">
+              <input type="file" id="photo-upload" accept="image/*" class="hidden" onchange="updateProfilePhoto(event)">
+              <div class="absolute inset-0 bg-cyan-950/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity pointer-events-none">
+                <span class="text-[9px] text-cyan-200 font-bold">CLICK TO CHANGE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Color Scale Bar (FEA / CFD Legend) -->
+        <div class="border-t border-cyan-900/60 pt-3 z-10 flex items-center justify-between">
+          <div class="flex items-center space-x-3 w-full max-w-xs">
+            <span class="text-[9px] text-slate-400 uppercase">Min (0 MPa)</span>
+            <div class="h-2.5 flex-grow rounded-sm bg-gradient-to-r from-blue-600 via-cyan-400 via-green-400 via-yellow-400 to-red-600 border border-slate-700"></div>
+            <span class="text-[9px] text-slate-400 uppercase">Max (450 MPa)</span>
+          </div>
+          <div class="text-[10px] text-cyan-400 font-mono">
+            MESH: 1.42M NODES
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 1: FEATURED PROJECTS (Multi-Physics & Architectural) -->
+    <section id="projects" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-cyan-900/60 pb-3">
+        <h3 class="text-lg font-bold text-slate-100 uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="layers" class="w-5 h-5 text-amber-400"></i>
+          [01] Featured Structural & Multi-Physics Projects
+        </h3>
+        <span class="text-xs text-slate-500 font-mono">COUNT: 05 VALIDATED MODELS</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Project 1 -->
+        <div class="project-card bg-[#080d1a] border border-cyan-900/80 p-4 hover:border-amber-500/80 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative h-44 mb-3 overflow-hidden border border-slate-800 bg-slate-950">
+              <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=600&q=80" alt="UAV Wing Structure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-2 right-2 bg-slate-950/80 text-cyan-400 border border-cyan-500/50 text-[9px] px-2 py-0.5">
+                FEA / COMPOSITES
+              </div>
+            </div>
+            <h4 class="text-sm font-bold text-slate-100 mb-1 group-hover:text-amber-400 transition-colors">
+              V-24 UAV Wing Structure & Structural FEA
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Aero-structure layout with composite rib optimization. Evaluated aero-elastic flutter and high-g maneuvering deflection in Abaqus.
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-[9px] font-mono">
+            <span class="px-2 py-0.5 border border-cyan-900 bg-cyan-950/40 text-cyan-300">ABAQUS</span>
+            <span class="px-2 py-0.5 border border-cyan-900 bg-cyan-950/40 text-cyan-300">COMPOSITES</span>
+            <span class="px-2 py-0.5 border border-amber-900 bg-amber-950/40 text-amber-300">DFM</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card bg-[#080d1a] border border-cyan-900/80 p-4 hover:border-amber-500/80 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative h-44 mb-3 overflow-hidden border border-slate-800 bg-slate-950">
+              <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" alt="Manifold Housing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-2 right-2 bg-slate-950/80 text-amber-400 border border-amber-500/50 text-[9px] px-2 py-0.5">
+                DFMA / DFM
+              </div>
+            </div>
+            <h4 class="text-sm font-bold text-slate-100 mb-1 group-hover:text-amber-400 transition-colors">
+              Complex Hydraulic Manifold - DFM/A & DFMEA
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Redesigned cast manifold housing for high-pressure aerospace actuation. Applied DFMEA risk assessment reducing machining cycles by 24%.
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-[9px] font-mono">
+            <span class="px-2 py-0.5 border border-amber-900 bg-amber-950/40 text-amber-300">DFMEA</span>
+            <span class="px-2 py-0.5 border border-cyan-900 bg-cyan-950/40 text-cyan-300">SOLIDWORKS</span>
+            <span class="px-2 py-0.5 border border-cyan-900 bg-cyan-950/40 text-cyan-300">CASTING</span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card bg-[#080d1a] border border-cyan-900/80 p-4 hover:border-amber-500/80 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="relative h-44 mb-3 overflow-hidden border border-slate-800 bg-slate-950">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Architectural Canopy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-2 right-2 bg-slate-950/80 text-green-400 border border-green-500/50 text-[9px] px-2 py-0.5">
+                ARCHITECTURAL CFD
+              </div>
+            </div>
+            <h4 class="text-sm font-bold text-slate-100 mb-1 group-hover:text-amber-400 transition-colors">
+              Parametric Architectural Canopy - Wind Pressure CFD
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Large-scale freeform structural canopy. Performed atmospheric boundary layer CFD in ANSYS Fluent to calculate uplift pressures for steel nodes.
+            </p>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-[9px] font-mono">
+            <span class="px-2 py-0.5 border border-green-900 bg-green-950/40 text-green-300">REVIT</span>
+            <span class="px-2 py-0.5 border border-cyan-900 bg-cyan-950/40 text-cyan-300">ANSYS FLUENT</span>
+            <span class="px-2 py-0.5 border border-amber-900 bg-amber-950/40 text-amber-300">WIND LOAD</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: TECHNICAL SKILLS & SOFTWARE MATRIX -->
+    <section id="skills" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-cyan-900/60 pb-3">
+        <h3 class="text-lg font-bold text-slate-100 uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="cpu" class="w-5 h-5 text-cyan-400"></i>
+          [02] Engineering Software & Analysis Suite
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        
+        <div class="border border-slate-800 bg-[#080d1a] p-3 text-center hover:border-cyan-500 transition-all">
+          <div class="text-cyan-400 font-bold text-sm mb-1">ABAQUS</div>
+          <div class="text-[9px] text-slate-500 uppercase">Non-linear FEA</div>
+        </div>
+
+        <div class="border border-slate-800 bg-[#080d1a] p-3 text-center hover:border-cyan-500 transition-all">
+          <div class="text-amber-400 font-bold text-sm mb-1">ANSYS FLUENT</div>
+          <div class="text-[9px] text-slate-500 uppercase">Compressible CFD</div>
+        </div>
+
+        <div class="border border-slate-800 bg-[#080d1a] p-3 text-center hover:border-cyan-500 transition-all">
+          <div class="text-cyan-400 font-bold text-sm mb-1">SOLIDWORKS</div>
+          <div class="text-[9px] text-slate-500 uppercase">CSWP / 3D CAD</div>
+        </div>
+
+        <div class="border border-slate-800 bg-[#080d1a] p-3 text-center hover:border-cyan-500 transition-all">
+          <div class="text-amber-400 font-bold text-sm mb-1">AUTODESK REVIT</div>
+          <div class="text-[9px] text-slate-500 uppercase">BIM / Facades</div>
+        </div>
+
+        <div class="border border-slate-800 bg-[#080d1a] p-3 text-center hover:border-cyan-500 transition-all">
+          <div class="text-cyan-400 font-bold text-sm mb-1">MIDAS GEN</div>
+          <div class="text-[9px] text-slate-500 uppercase">Building FEA</div>
+        </div>
+
+        <div class="border border-slate-800 bg-[#080d1a] p-3 text-center hover:border-cyan-500 transition-all">
+          <div class="text-amber-400 font-bold text-sm mb-1">CATIA V5</div>
+          <div class="text-[9px] text-slate-500 uppercase">Aerospace Surface</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: ENGINEERING WORKFLOW NODES -->
+    <section id="workflow" class="space-y-6">
+      <div class="flex items-center justify-between border-b border-cyan-900/60 pb-3">
+        <h3 class="text-lg font-bold text-slate-100 uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="git-commit" class="w-5 h-5 text-amber-400"></i>
+          [03] Integrated Mechanical & Architectural Workflow
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+        
+        <div class="border border-cyan-900/80 bg-[#080d1a] p-3 relative">
+          <div class="text-[9px] text-amber-400 font-bold mb-1">01 // CAD/BIM LOGIC</div>
+          <div class="text-xs font-bold text-slate-200 mb-1">Parametric Surface</div>
+          <div class="text-[10px] text-slate-400">SolidWorks, CATIA & Revit geometry modeling.</div>
+        </div>
+
+        <div class="border border-cyan-900/80 bg-[#080d1a] p-3 relative">
+          <div class="text-[9px] text-amber-400 font-bold mb-1">02 // MULTI-PHYSICS</div>
+          <div class="text-xs font-bold text-slate-200 mb-1">FEA / CFD Mesh</div>
+          <div class="text-[10px] text-slate-400">Abaqus structural & Fluent aerodynamic solvers.</div>
+        </div>
+
+        <div class="border border-cyan-900/80 bg-[#080d1a] p-3 relative">
+          <div class="text-[9px] text-amber-400 font-bold mb-1">03 // DFM / DFMA</div>
+          <div class="text-xs font-bold text-slate-200 mb-1">Manufacturability</div>
+          <div class="text-[10px] text-slate-400">Tolerance stack-ups, tooling, and CNC toolpaths.</div>
+        </div>
+
+        <div class="border border-cyan-900/80 bg-[#080d1a] p-3 relative">
+          <div class="text-[9px] text-amber-400 font-bold mb-1">04 // RISK REVIEW</div>
+          <div class="text-xs font-bold text-slate-200 mb-1">DFMEA / PFMEA</div>
+          <div class="text-[10px] text-slate-400">RPN score minimization and structural failure modes.</div>
+        </div>
+
+        <div class="border border-amber-500/80 bg-amber-950/20 p-3 relative">
+          <div class="text-[9px] text-amber-400 font-bold mb-1">05 // VALIDATION</div>
+          <div class="text-xs font-bold text-slate-200 mb-1">Physical Testing</div>
+          <div class="text-[10px] text-slate-400">Strain gauge, dynamic vibration, and site deployment.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: PROFESSIONAL DOSSIER (Experience & Education) -->
+    <section id="experience" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Experience Column -->
+      <div class="space-y-4">
+        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-slate-800 pb-2">
+          Experience Dossier
+        </h4>
+
+        <div class="border-l-2 border-cyan-500 pl-3 space-y-1">
+          <div class="text-xs font-bold text-slate-100">IG Defence</div>
+          <div class="text-[10px] text-cyan-400">Mechanical Design Engineer 1 | May 2025 - Present</div>
+          <p class="text-[11px] text-slate-400">Lead structural analysis for uncrewed aerial systems and composite airframes.</p>
+        </div>
+
+        <div class="border-l-2 border-slate-700 pl-3 space-y-1">
+          <div class="text-xs font-bold text-slate-200">DRDO</div>
+          <div class="text-[10px] text-slate-400">Summer Research Intern | May 2024 - Jun 2024</div>
+          <p class="text-[11px] text-slate-400">Analyzed shockwave dynamics and transient pressure loading.</p>
+        </div>
+      </div>
+
+      <!-- Education Column -->
+      <div class="space-y-4">
+        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-slate-800 pb-2">
+          Academic Track
+        </h4>
+
+        <div class="border-l-2 border-amber-500 pl-3 space-y-1">
+          <div class="text-xs font-bold text-slate-100">VSSUT, Burla</div>
+          <div class="text-[10px] text-amber-400">B.Tech - Mechanical Engineering | Class of 2026</div>
+          <p class="text-[11px] text-slate-400">Specialized in Finite Element Methods and Structural Dynamics.</p>
+        </div>
+      </div>
+
+      <!-- Certifications Column -->
+      <div class="space-y-4">
+        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-slate-800 pb-2">
+          Industry Credentials
+        </h4>
+
+        <div class="space-y-2 text-xs">
+          <div class="border border-slate-800 p-2 bg-[#080d1a]">
+            <span class="text-slate-200 font-bold block">SOLIDWORKS CSWA / CSWP</span>
+            <span class="text-[10px] text-slate-400">Official Dassault Systèmes Certification</span>
+          </div>
+          <div class="border border-slate-800 p-2 bg-[#080d1a]">
+            <span class="text-slate-200 font-bold block">ANSYS Fluent Virtual Internship</span>
+            <span class="text-[10px] text-slate-400">AICTE / High-Speed Compressible Flow</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 5: CONTACT FOOTER -->
+    <section id="contact" class="border border-cyan-900/80 bg-[#080d1a] p-6 text-center space-y-4">
+      <h3 class="text-lg font-bold text-slate-100 uppercase tracking-wider">
+        Initiate Technical Communication
+      </h3>
+      <p class="text-xs text-slate-400 max-w-xl mx-auto">
+        Available for structural mechanical consultation, FEA/CFD multi-physics auditing, and architectural facade engineering projects.
+      </p>
+
+      <div class="flex items-center justify-center gap-4 text-xs font-mono">
+        <a href="mailto:manasmallik09@gmail.com" class="px-4 py-2 border border-amber-500 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 transition-all">
+          SEND ENQUIRY VIA EMAIL
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-900 py-6 text-center text-[10px] text-slate-600 font-mono">
+    MANAS MALLIK © 2026 // MECHANICAL STRUCTURAL DESIGN ENGINEER
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
