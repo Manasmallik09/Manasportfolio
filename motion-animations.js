@@ -4,13 +4,45 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initPhotoUploader();
   initSmoothScroll();
   initTiltEffect();
   initCanvasParticleHUD();
   initTelemetryCounter();
 });
 
-/* 1. Smooth Scrolling for Navigation Links */
+/* 1. Base64 Persistent Photo Upload Engine */
+function initPhotoUploader() {
+  const photoUpload = document.getElementById("photo-upload");
+  const profileImg = document.getElementById("profile-img");
+  const profilePlaceholder = document.getElementById("profile-placeholder");
+
+  if (!photoUpload || !profileImg) return;
+
+  const savedPhoto = localStorage.getItem("manas_portfolio_photo");
+  if (savedPhoto) {
+    profileImg.src = savedPhoto;
+    profileImg.classList.remove("hidden");
+    if (profilePlaceholder) profilePlaceholder.classList.add("hidden");
+  }
+
+  photoUpload.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const base64Image = event.target.result;
+        profileImg.src = base64Image;
+        profileImg.classList.remove("hidden");
+        if (profilePlaceholder) profilePlaceholder.classList.add("hidden");
+        localStorage.setItem("manas_portfolio_photo", base64Image);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+/* 2. Smooth Scrolling for Navigation Links */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
@@ -27,7 +59,7 @@ function initSmoothScroll() {
   });
 }
 
-/* 2. Interactive 3D Card Tilt Effect on Hover */
+/* 3. Interactive 3D Card Tilt Effect on Hover */
 function initTiltEffect() {
   const cards = document.querySelectorAll("#skills > div > div, #projects > div > div");
 
@@ -42,11 +74,11 @@ function initTiltEffect() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      card.style.boxShadow = "0 10px 25px -5px rgba(6, 182, 212, 0.2)";
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+      card.style.boxShadow = "0 10px 25px -5px rgba(6, 182, 212, 0.15)";
     });
 
     card.addEventListener("mouseleave", () => {
@@ -56,7 +88,7 @@ function initTiltEffect() {
   });
 }
 
-/* 3. Interactive HUD Grid Floating Nodes */
+/* 4. Interactive HUD Grid Floating Nodes */
 function initCanvasParticleHUD() {
   const canvas = document.createElement("canvas");
   canvas.id = "hud-motion-canvas";
@@ -67,7 +99,7 @@ function initCanvasParticleHUD() {
   canvas.style.height = "100vh";
   canvas.style.pointerEvents = "none";
   canvas.style.zIndex = "1";
-  canvas.style.opacity = "0.4";
+  canvas.style.opacity = "0.3";
   document.body.prepend(canvas);
 
   const ctx = canvas.getContext("2d");
@@ -89,8 +121,8 @@ function initCanvasParticleHUD() {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
       this.size = Math.random() * 1.5 + 0.5;
     }
     update() {
@@ -108,7 +140,7 @@ function initCanvasParticleHUD() {
     }
   }
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 35; i++) {
     particles.push(new Particle());
   }
 
@@ -124,8 +156,8 @@ function initCanvasParticleHUD() {
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 120) {
-          ctx.strokeStyle = `rgba(14, 116, 144, ${1 - dist / 120})`;
+        if (dist < 110) {
+          ctx.strokeStyle = `rgba(14, 116, 144, ${1 - dist / 110})`;
           ctx.lineWidth = 0.5;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
@@ -140,7 +172,7 @@ function initCanvasParticleHUD() {
   animate();
 }
 
-/* 4. Live Dynamic CAD Telemetry Reader */
+/* 5. Live CAD Telemetry Rotator */
 function initTelemetryCounter() {
   const statusElem = document.getElementById("solver-status");
   if (!statusElem) return;
