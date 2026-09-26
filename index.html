@@ -3,49 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manas Mallik — Mechanical Design & Analysis Portfolio</title>
+  <title>Manas Mallik — Mechanical Engineering & CAD/FEA Portfolio</title>
   
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* Clean Mechanical Blueprint Grid */
+    :root {
+      --bg-dark: #070a11;
+      --cyan-glow: #06b6d4;
+      --magenta-stress: #f43f5e;
+    }
+
     body {
-      background-color: #0d1117;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 24px 24px;
-      color: #c9d1d9;
+      background-color: var(--bg-dark);
+      color: #e2e8f0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
     }
 
     .font-mono-tech {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     }
 
-    /* Tab Transition Logic */
+    /* Subtle Technical Grid Background */
+    .blueprint-grid {
+      background-image: 
+        linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    /* Glowing Engineering Glassmorphism Cards */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(6, 182, 212, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px -10px rgba(6, 182, 212, 0.3);
+    }
+
+    /* Tab Switcher Styles */
     .tab-content {
       display: none;
       opacity: 0;
-      transition: opacity 0.2s ease-in-out;
+      transform: scale(0.98);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
     .tab-content.active {
       display: block;
       opacity: 1;
+      transform: scale(1);
     }
 
-    /* Clean Card Hover */
-    .border-card {
-      border: 1px solid #30363d;
-      background-color: #161b22;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-    .border-card:hover {
-      border-color: #58a6ff;
-    }
-
-    /* Accordion Details */
+    /* Accordion Expansion */
     .skill-card {
       cursor: pointer;
     }
@@ -53,257 +70,490 @@
       max-height: 0;
       opacity: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.2s ease;
+      transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
+    }
+    .skill-card.expanded {
+      border-color: #06b6d4;
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
     }
     .skill-card.expanded .skill-details {
       max-height: 180px;
       opacity: 1;
       margin-top: 0.75rem;
     }
+
+    /* Scanline Overlay Effect */
+    .scanline {
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(6, 182, 212, 0.03) 50%,
+        rgba(6, 182, 212, 0.03)
+      );
+      background-size: 100% 4px;
+    }
   </style>
 </head>
-<body class="min-h-screen pb-12 text-slate-300">
+<body class="relative min-h-screen blueprint-grid scanline pb-12">
 
-  <!-- Header Banner -->
-  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+  <!-- DYNAMIC INTERACTIVE FEA/CAD BACKGROUND CANVAS -->
+  <canvas id="fea-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- HUD TECHNICAL CORNER READOUTS -->
+  <div class="fixed top-3 left-4 pointer-events-none text-[10px] text-cyan-500/50 font-mono-tech z-10 hidden sm:block">
+    + CAD/FEA ENGINE RUNNING<br/>
+    | MOUSE PROBE: ACTIVE [STRESS DYNAMICS ON]
+  </div>
+  <div class="fixed top-3 right-4 pointer-events-none text-[10px] text-cyan-500/50 font-mono-tech z-10 text-right hidden sm:block">
+    ISO 128 MECHANICAL CAD WORKSTATION<br/>
+    3RD ANGLE PROJECTION SYMBOL (+) [O]
+  </div>
+
+  <!-- MAIN INTERFACE LAYOUT -->
+  <div class="relative z-10 max-w-5xl mx-auto px-4 pt-6">
+
+    <!-- HEADER / NAVIGATION BRANDING -->
+    <header class="glass-card rounded-xl p-5 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-l-4 border-l-cyan-500">
       <div>
-        <h1 class="text-xl font-bold text-white tracking-wide">Manas Mallik</h1>
-        <p class="text-xs text-slate-400 font-mono-tech mt-0.5">Mechanical Design Engineer | CAD, DFM & Thermal/CFD</p>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+          <h1 class="text-xl font-bold text-white tracking-wider">MANAS MALLIK</h1>
+        </div>
+        <p class="text-xs text-cyan-400 font-mono-tech mt-1">Mechanical Design Engineer | CAD, DFM & FEA/CFD Specialist</p>
       </div>
-      <div class="flex items-center space-x-3 text-xs font-mono-tech text-slate-400">
-        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-        <span>Open to Design Roles</span>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono-tech text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-3 py-1.5 rounded-full flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          STATUS: READY FOR DESIGNS
+        </span>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="max-w-5xl mx-auto px-6 pt-8">
-
-    <!-- TAB NAVIGATION -->
-    <nav class="flex border-b border-slate-800 mb-8 space-x-2 font-mono-tech text-xs" id="tab-navigation">
-      <button onclick="switchTab('about')" id="tab-btn-about" class="tab-btn active px-4 py-2.5 font-medium border-b-2 border-blue-500 text-blue-400">
-        Overview
+    <!-- NAVIGATION TABS -->
+    <nav class="flex flex-wrap gap-2 mb-6 font-mono-tech text-xs" id="tab-navigation">
+      <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-btn active px-4 py-2.5 rounded-lg border border-cyan-500 bg-cyan-950/60 text-cyan-300 font-semibold shadow-lg transition-all">
+        [00] TELEMETRY & PROFILE
       </button>
-      <button onclick="switchTab('skills')" id="tab-btn-skills" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200">
-        Core Competencies
+      <button onclick="switchTab('skills')" id="tab-btn-skills" class="tab-btn px-4 py-2.5 rounded-lg border border-slate-800 bg-slate-900/60 text-slate-400 hover:border-cyan-800 hover:text-cyan-300 transition-all">
+        [01] CORE COMPETENCIES
       </button>
-      <button onclick="switchTab('projects')" id="tab-btn-projects" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200">
-        Key Projects
+      <button onclick="switchTab('projects')" id="tab-btn-projects" class="tab-btn px-4 py-2.5 rounded-lg border border-slate-800 bg-slate-900/60 text-slate-400 hover:border-cyan-800 hover:text-cyan-300 transition-all">
+        [02] KEY PROJECTS & AIR 1
       </button>
-      <button onclick="switchTab('experience')" id="tab-btn-experience" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200">
-        Experience
+      <button onclick="switchTab('experience')" id="tab-btn-experience" class="tab-btn px-4 py-2.5 rounded-lg border border-slate-800 bg-slate-900/60 text-slate-400 hover:border-cyan-800 hover:text-cyan-300 transition-all">
+        [03] EXPERIENTIAL DOSSIER
       </button>
     </nav>
 
-    <!-- TAB 1: OVERVIEW -->
-    <div id="tab-about" class="tab-content active space-y-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- TAB 0: OVERVIEW & CAD SIMULATOR -->
+    <div id="tab-overview" class="tab-content active space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <!-- Profile Sidebar -->
-        <div class="border-card rounded-lg p-6 flex flex-col items-center text-center">
-          <div class="relative w-36 h-36 mb-4 rounded-lg overflow-hidden border border-slate-700 bg-slate-950 flex items-center justify-center group">
+        <!-- Profile Card -->
+        <div class="glass-card rounded-xl p-6 flex flex-col items-center text-center">
+          <div class="relative w-36 h-36 mb-4 rounded-xl overflow-hidden border-2 border-cyan-500/40 bg-slate-950 flex items-center justify-center group shadow-inner">
             <img id="profile-img" src="" alt="Profile" class="w-full h-full object-cover hidden" />
             <div id="profile-placeholder" class="text-xs text-slate-500 p-4 font-mono-tech">
-              Upload Headshot
+              [ Click / Drop Photo ]
             </div>
             <input type="file" id="photo-upload" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" />
           </div>
           <h2 class="text-lg font-bold text-white">Manas Mallik</h2>
-          <p class="text-xs text-blue-400 font-mono-tech mb-4">Engineer 1 — Mechanical Design</p>
-          
-          <div class="w-full text-left text-xs space-y-2 border-t border-slate-800 pt-4 text-slate-400 font-mono-tech">
+          <p class="text-xs text-cyan-400 font-mono-tech mb-4">Engineer 1 — Mechanical Design</p>
+
+          <div class="w-full text-left text-xs space-y-2 border-t border-slate-800/80 pt-4 text-slate-400 font-mono-tech">
             <p><span class="text-slate-200">Location:</span> Delhi, India</p>
-            <p><span class="text-slate-200">Education:</span> VSSUT Burla (B.Tech, 8.02 GPA)</p>
-            <p><span class="text-slate-200">Recognition:</span> AIR 1, SAE DDC 2025</p>
+            <p><span class="text-slate-200">Education:</span> VSSUT Burla (GPA: 8.02)</p>
+            <p><span class="text-slate-200">Accolade:</span> AIR 1, SAE DDC 2025</p>
           </div>
         </div>
 
-        <!-- Professional Summary -->
-        <div class="md:col-span-2 border-card rounded-lg p-6 flex flex-col justify-between">
+        <!-- Interactive Parametric 3D CAD Viewport -->
+        <div class="md:col-span-2 glass-card rounded-xl p-6 flex flex-col justify-between">
           <div>
-            <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3 font-mono-tech text-blue-400">Engineering Profile</h3>
-            <p class="text-sm text-slate-300 leading-relaxed mb-4">
-              Mechanical Design Engineer specializing in structural packaging, sheet metal enclosures, and computational analysis (FEA/CFD). Proven experience developing flight hardware for UAV platforms and shockwave modeling for defense applications. 
-            </p>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              Proficient in full product development cycles — from parametric CAD modeling and GD&T drafting to DFM/DFA review, tooling layout, and production release.
-            </p>
+            <div class="flex justify-between items-center mb-3 border-b border-slate-800/80 pb-2 font-mono-tech">
+              <span class="text-xs text-cyan-400 font-semibold">[ INTERACTIVE 3D CAD ENGINE ]</span>
+              <span class="text-[11px] text-rose-400 animate-pulse">MOVE CURSOR TO ANALYZE STRESS</span>
+            </div>
+
+            <!-- Canvas Viewport with Explode Control -->
+            <div class="relative h-56 w-full bg-slate-950/90 rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center">
+              <canvas id="cad-viewport" class="w-full h-full"></canvas>
+              
+              <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center bg-slate-900/80 backdrop-blur px-3 py-1.5 rounded border border-slate-800 text-[11px] font-mono-tech">
+                <span class="text-slate-400">EXPAND ASSEMBLY MESH:</span>
+                <input type="range" id="explode-slider" min="0" max="100" value="0" class="w-1/2 accent-cyan-500 cursor-pointer" />
+              </div>
+            </div>
           </div>
 
-          <div class="border-t border-slate-800 pt-4 mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-mono-tech">
-            <div>
-              <span class="text-slate-500 block">PRIMARY CAD</span>
-              <span class="text-slate-200 font-semibold">SolidWorks, Creo</span>
-            </div>
-            <div>
-              <span class="text-slate-500 block">SIMULATION</span>
-              <span class="text-slate-200 font-semibold">ANSYS Fluent / Static</span>
-            </div>
-            <div>
-              <span class="text-slate-500 block">STANDARDS</span>
-              <span class="text-slate-200 font-semibold">ASME Y14.5 (GD&T)</span>
-            </div>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap justify-between items-center text-xs font-mono-tech text-slate-400 gap-2">
+            <span>Specialization: Defense Packaging & UAV Flight Hardware</span>
+            <span class="text-cyan-400">ASME Y14.5 / DFM VALIDATED</span>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- TAB 2: COMPETENCIES -->
+    <!-- TAB 1: CORE COMPETENCIES -->
     <div id="tab-skills" class="tab-content">
-      <div class="mb-6">
-        <h2 class="text-base font-bold text-white">Technical Competencies</h2>
-        <p class="text-xs text-slate-400 font-mono-tech mt-1">Select a skill to view domain background and practical applications.</p>
+      <div class="mb-4">
+        <h2 class="text-base font-bold text-white">[01] TECHNICAL COMPETENCY MATRIX</h2>
+        <p class="text-xs text-slate-400 font-mono-tech">Click any skill block to inspect application origin and technical deployment.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
         <!-- Skill 1 -->
-        <div onclick="toggleSkill(this)" class="skill-card border-card rounded-lg p-5">
-          <h3 class="text-sm font-bold text-white">SolidWorks 3D Design</h3>
-          <p class="text-xs text-slate-400 mt-1">Parametric assemblies, complex surfacing, & BOM management.</p>
-          <div class="skill-details border-t border-slate-800 pt-3 text-xs space-y-1 font-mono-tech">
-            <p class="text-blue-400">Training: CTTC Design Certification</p>
-            <p class="text-slate-300">Applied: UAV structure & packaging enclosures.</p>
+        <div onclick="toggleSkill(this)" class="skill-card glass-card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 bg-red-950/60 border border-red-800/80 rounded-lg text-red-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            </div>
+            <div>
+              <h3 class="text-white font-bold text-sm">SolidWorks</h3>
+              <p class="text-[11px] text-slate-400">3D Modeling & Complex Assemblies</p>
+            </div>
+          </div>
+          <div class="skill-details border-t border-slate-800/80 pt-3 text-xs space-y-1 font-mono-tech">
+            <p class="text-cyan-400">Training: CTTC Bhubaneswar Certification</p>
+            <p class="text-slate-300">Applied: UAV Structural Layout & Defense Packaging</p>
           </div>
         </div>
 
         <!-- Skill 2 -->
-        <div onclick="toggleSkill(this)" class="skill-card border-card rounded-lg p-5">
-          <h3 class="text-sm font-bold text-white">GD&T & Tolerance Stack-Up</h3>
-          <p class="text-xs text-slate-400 mt-1">ASME Y14.5 drafting, fit analysis, & manufacturing drawings.</p>
-          <div class="skill-details border-t border-slate-800 pt-3 text-xs space-y-1 font-mono-tech">
-            <p class="text-blue-400">Training: CTTC Toolroom Practice</p>
-            <p class="text-slate-300">Applied: Production-ready defense chassis drawings.</p>
+        <div onclick="toggleSkill(this)" class="skill-card glass-card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 bg-emerald-950/60 border border-emerald-800/80 rounded-lg text-emerald-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-white font-bold text-sm">GD&T & DFM</h3>
+              <p class="text-[11px] text-slate-400">Tolerance Stack-Up & ASME Y14.5</p>
+            </div>
+          </div>
+          <div class="skill-details border-t border-slate-800/80 pt-3 text-xs space-y-1 font-mono-tech">
+            <p class="text-cyan-400">Training: CTTC Toolroom Practice</p>
+            <p class="text-slate-300">Applied: Production-Ready Flight Chassis Drawings</p>
           </div>
         </div>
 
         <!-- Skill 3 -->
-        <div onclick="toggleSkill(this)" class="skill-card border-card rounded-lg p-5">
-          <h3 class="text-sm font-bold text-white">ANSYS Fluent (CFD & FEA)</h3>
-          <p class="text-xs text-slate-400 mt-1">High-velocity flow simulations & structural load verification.</p>
-          <div class="skill-details border-t border-slate-800 pt-3 text-xs space-y-1 font-mono-tech">
-            <p class="text-blue-400">Training: AICTE & Academic Research</p>
-            <p class="text-slate-300">Applied: DRDO shockwave modeling study.</p>
+        <div onclick="toggleSkill(this)" class="skill-card glass-card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 bg-cyan-950/60 border border-cyan-800/80 rounded-lg text-cyan-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-white font-bold text-sm">ANSYS Fluent (CFD/FEA)</h3>
+              <p class="text-[11px] text-slate-400">Shockwave & Thermal Dynamic Validation</p>
+            </div>
+          </div>
+          <div class="skill-details border-t border-slate-800/80 pt-3 text-xs space-y-1 font-mono-tech">
+            <p class="text-cyan-400">Training: AICTE & VSSUT Research</p>
+            <p class="text-slate-300">Applied: DRDO Supersonic Shockwave Modeling</p>
           </div>
         </div>
 
         <!-- Skill 4 -->
-        <div onclick="toggleSkill(this)" class="skill-card border-card rounded-lg p-5">
-          <h3 class="text-sm font-bold text-white">Sheet Metal & Enclosures</h3>
-          <p class="text-xs text-slate-400 mt-1">Bend allowances, punch layouts, and structural housing design.</p>
-          <div class="skill-details border-t border-slate-800 pt-3 text-xs space-y-1 font-mono-tech">
-            <p class="text-blue-400">Training: Industrial Toolroom Modules</p>
-            <p class="text-slate-300">Applied: Electronics packaging units.</p>
+        <div onclick="toggleSkill(this)" class="skill-card glass-card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 bg-amber-950/60 border border-amber-800/80 rounded-lg text-amber-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+            <div>
+              <h3 class="text-white font-bold text-sm">Sheet Metal Enclosures</h3>
+              <p class="text-[11px] text-slate-400">Bending, Punch Layouts & Packaging</p>
+            </div>
+          </div>
+          <div class="skill-details border-t border-slate-800/80 pt-3 text-xs space-y-1 font-mono-tech">
+            <p class="text-cyan-400">Training: Toolroom Workshop Practice</p>
+            <p class="text-slate-300">Applied: IG Defence Structural Housings</p>
           </div>
         </div>
 
         <!-- Skill 5 -->
-        <div onclick="toggleSkill(this)" class="skill-card border-card rounded-lg p-5">
-          <h3 class="text-sm font-bold text-white">Injection Mold Tooling</h3>
-          <p class="text-xs text-slate-400 mt-1">Core/cavity separation, draft angles, & mold base assembly.</p>
-          <div class="skill-details border-t border-slate-800 pt-3 text-xs space-y-1 font-mono-tech">
-            <p class="text-blue-400">Training: Creo Parametric Tooling</p>
-            <p class="text-slate-300">Applied: Plastic component hand mold tooling.</p>
+        <div onclick="toggleSkill(this)" class="skill-card glass-card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 bg-blue-950/60 border border-blue-800/80 rounded-lg text-blue-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-white font-bold text-sm">Creo Injection Tooling</h3>
+              <p class="text-[11px] text-slate-400">Core/Cavity Separation & Mold Design</p>
+            </div>
+          </div>
+          <div class="skill-details border-t border-slate-800/80 pt-3 text-xs space-y-1 font-mono-tech">
+            <p class="text-cyan-400">Training: CTTC Mold Design</p>
+            <p class="text-slate-300">Applied: Hand Mold Plastic Tooling Assembly</p>
           </div>
         </div>
 
         <!-- Skill 6 -->
-        <div onclick="toggleSkill(this)" class="skill-card border-card rounded-lg p-5">
-          <h3 class="text-sm font-bold text-white">DFM / DFA Principles</h3>
-          <p class="text-xs text-slate-400 mt-1">Optimizing design geometry for CNC, sheet metal, and assembly.</p>
-          <div class="skill-details border-t border-slate-800 pt-3 text-xs space-y-1 font-mono-tech">
-            <p class="text-blue-400">Training: VSSUT Engineering Curriculum</p>
-            <p class="text-slate-300">Applied: Cost reduction & manufacturing optimization.</p>
+        <div onclick="toggleSkill(this)" class="skill-card glass-card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <div class="p-2 bg-purple-950/60 border border-purple-800/80 rounded-lg text-purple-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-white font-bold text-sm">Fusion 360 / AutoCAD</h3>
+              <p class="text-[11px] text-slate-400">Generative Layouts & Drafting</p>
+            </div>
+          </div>
+          <div class="skill-details border-t border-slate-800/80 pt-3 text-xs space-y-1 font-mono-tech">
+            <p class="text-cyan-400">Training: VSSUT Engineering Coursework</p>
+            <p class="text-slate-300">Applied: 2D Mechanical Schematic Releases</p>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- TAB 3: PROJECTS -->
+    <!-- TAB 2: PROJECTS -->
     <div id="tab-projects" class="tab-content">
-      <h2 class="text-base font-bold text-white mb-6">Engineering Projects</h2>
+      <h2 class="text-base font-bold text-white mb-6">[02] MAJOR ENGINEERING PROJECTS</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <div class="border-card rounded-lg p-6">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="text-base font-bold text-white">SAEISS DDC 2025 UAV Structure</h3>
-            <span class="text-[11px] font-mono-tech text-blue-400 border border-blue-900 bg-blue-950/50 px-2 py-0.5 rounded">AIR 1 Award</span>
+        <div class="glass-card rounded-xl p-6 relative overflow-hidden">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="text-base font-bold text-white">SAEISS DDC 2025 UAV Architecture</h3>
+            <span class="bg-cyan-950/80 text-cyan-400 border border-cyan-800 text-[10px] px-2.5 py-1 rounded font-mono-tech font-semibold">NATIONAL AIR 1</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed mb-4">
-            Led structural design and aerodynamic layout for a fixed-wing uncrewed aerial vehicle. Performed material selection and finite element analysis (FEA) to maximize payload efficiency while preserving structural integrity.
+            Designed fixed-wing uncrewed aerial vehicle structures, payload distribution systems, material selection, and structural FEA verification.
           </p>
-          <div class="text-xs font-mono-tech text-slate-400 border-t border-slate-800 pt-3 space-y-1">
-            <p><strong class="text-slate-200">Tools:</strong> SolidWorks, ANSYS Mechanical</p>
-            <p><strong class="text-slate-200">Outcome:</strong> Ranked 1st overall in national design evaluation.</p>
+          <div class="text-xs font-mono-tech text-slate-400 border-t border-slate-800/80 pt-3 space-y-1">
+            <p><strong class="text-slate-200">Tools:</strong> SolidWorks, ANSYS Structural, DFM Workflow</p>
+            <p><strong class="text-slate-200">Validation:</strong> Awarded All India Rank 1 for Best Design Report</p>
           </div>
         </div>
 
-        <div class="border-card rounded-lg p-6">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="text-base font-bold text-white">Plastic Injection Mold Tooling Design</h3>
-            <span class="text-[11px] font-mono-tech text-slate-400 border border-slate-700 bg-slate-800 px-2 py-0.5 rounded">CTTC Project</span>
+        <div class="glass-card rounded-xl p-6 relative overflow-hidden">
+          <div class="flex justify-between items-start mb-3">
+            <h3 class="text-base font-bold text-white">Plastic Injection Mold Tooling</h3>
+            <span class="bg-slate-800/80 text-slate-300 border border-slate-700 text-[10px] px-2.5 py-1 rounded font-mono-tech">CTTC PROJECT</span>
           </div>
           <p class="text-xs text-slate-300 leading-relaxed mb-4">
-            Designed a complete injection mold tool system for plastic component production. Engineered core and cavity geometry, ejection mechanism, runner systems, and drafted manufacturing drawings using Creo Parametric.
+            Complete toolroom design for a plastic injection hand mold, including core/cavity calculation, mold base layouts, and DFMEA reporting.
           </p>
-          <div class="text-xs font-mono-tech text-slate-400 border-t border-slate-800 pt-3 space-y-1">
-            <p><strong class="text-slate-200">Tools:</strong> Creo Parametric, Toolroom Standards</p>
-            <p><strong class="text-slate-200">Outcome:</strong> Validated against CTTC precision manufacturing guidelines.</p>
+          <div class="text-xs font-mono-tech text-slate-400 border-t border-slate-800/80 pt-3 space-y-1">
+            <p><strong class="text-slate-200">Tools:</strong> Creo Parametric, CNC Milling Toolpathing</p>
+            <p><strong class="text-slate-200">Validation:</strong> Validated via CTTC Tool-Room Precision Standards</p>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- TAB 4: EXPERIENCE -->
+    <!-- TAB 3: EXPERIENCE -->
     <div id="tab-experience" class="tab-content">
-      <h2 class="text-base font-bold text-white mb-6">Work Experience</h2>
+      <h2 class="text-base font-bold text-white mb-6">[03] EXPERIENTIAL DOSSIER</h2>
       <div class="space-y-4">
         
-        <div class="border-card rounded-lg p-5 flex flex-col md:flex-row justify-between md:items-center gap-3">
+        <div class="glass-card rounded-xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4">
           <div>
-            <h3 class="text-sm font-bold text-white">IG Defence — Engineer 1 (Mechanical Design)</h3>
-            <p class="text-xs text-slate-400 mt-1">Responsible for structural packaging, sheet metal chassis layout, GD&T drawings, and manufacturing BOM releases.</p>
+            <h3 class="text-sm font-bold text-white">IG Defence | Engineer 1 - Mechanical Design</h3>
+            <p class="text-xs text-slate-400 mt-1">UAV structural packaging, sheet metal enclosures, GD&T drawings, and BOM release.</p>
           </div>
-          <span class="text-xs font-mono-tech text-slate-400 shrink-0">Delhi, India</span>
+          <span class="text-xs font-mono-tech text-cyan-400 shrink-0">Delhi, India</span>
         </div>
 
-        <div class="border-card rounded-lg p-5 flex flex-col md:flex-row justify-between md:items-center gap-3">
+        <div class="glass-card rounded-xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4">
           <div>
-            <h3 class="text-sm font-bold text-white">DRDO — High-Velocity Research Intern</h3>
-            <p class="text-xs text-slate-400 mt-1">Executed parametric 3D CAD modeling and computational fluid dynamics (CFD) analysis for shockwave dynamics on specialized structural profiles.</p>
+            <h3 class="text-sm font-bold text-white">DRDO | High-Velocity Shockwave Research Intern</h3>
+            <p class="text-xs text-slate-400 mt-1">Parametric 3D modeling and computational shockwave analysis on supersonic structural profiles.</p>
           </div>
-          <span class="text-xs font-mono-tech text-slate-400 shrink-0">Defense R&D</span>
+          <span class="text-xs font-mono-tech text-cyan-400 shrink-0">Defense R&D</span>
         </div>
 
-        <div class="border-card rounded-lg p-5 flex flex-col md:flex-row justify-between md:items-center gap-3">
+        <div class="glass-card rounded-xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4">
           <div>
-            <h3 class="text-sm font-bold text-white">NALCO — Industrial Engineering Trainee</h3>
-            <p class="text-xs text-slate-400 mt-1">Analyzed smelter plant machinery, evaluated maintenance workflows, and assisted with plant optimization studies.</p>
+            <h3 class="text-sm font-bold text-white">NALCO | Industrial Engineering Trainee</h3>
+            <p class="text-xs text-slate-400 mt-1">Industrial smelter machinery maintenance, process layout evaluation, and Six Sigma troubleshooting.</p>
           </div>
-          <span class="text-xs font-mono-tech text-slate-400 shrink-0">Angul, Odisha</span>
+          <span class="text-xs font-mono-tech text-cyan-400 shrink-0">Angul, Odisha</span>
         </div>
 
       </div>
     </div>
 
-  </main>
+    <!-- FOOTER -->
+    <footer class="mt-12 pt-6 border-t border-slate-900 text-center text-xs font-mono-tech text-slate-500">
+      &copy; 2026 Manas Mallik. Engineered with Dynamic CAD/FEA Precision.
+    </footer>
 
-  <footer class="max-w-5xl mx-auto px-6 mt-16 pt-6 border-t border-slate-800 text-xs font-mono-tech text-slate-500 flex justify-between items-center">
-    <span>&copy; 2026 Manas Mallik</span>
-    <span>Engineered for Reliability & Manufacturability</span>
-  </footer>
+  </div>
 
+  <!-- INTERACTIVE CANVAS ENGINE & APPLICATION LOGIC -->
   <script>
-    /* Tab Switcher */
+    /* -------------------------------------------------------------
+       1. INTERACTIVE MOUSE STRESS-STRAIN FEA BACKGROUND ENGINE
+       ------------------------------------------------------------- */
+    const feaCanvas = document.getElementById('fea-canvas');
+    const feaCtx = feaCanvas.getContext('2d');
+    let width, height;
+    let mouse = { x: -1000, y: -1000 };
+
+    function resizeFEA() {
+      width = feaCanvas.width = window.innerWidth;
+      height = feaCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeFEA);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    resizeFEA();
+
+    // Node Mesh Network for Structural FEA Heatmap Simulation
+    const nodes = [];
+    const cols = Math.floor(window.innerWidth / 70);
+    const rows = Math.floor(window.innerHeight / 70);
+
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        nodes.push({
+          x: (i + 0.5) * (width / cols),
+          y: (j + 0.5) * (height / rows),
+          baseX: (i + 0.5) * (width / cols),
+          baseY: (j + 0.5) * (height / rows),
+          vx: 0, vy: 0
+        });
+      }
+    }
+
+    function renderFEA() {
+      feaCtx.clearRect(0, 0, width, height);
+
+      // Render Dynamic FEA Connections and Mouse Stress Contour
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        const dx = mouse.x - n.x;
+        const dy = mouse.y - n.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Repulsion / Deflection Stress Force
+        if (dist < 180) {
+          const force = (180 - dist) / 180;
+          n.vx -= (dx / dist) * force * 1.5;
+          n.vy -= (dy / dist) * force * 1.5;
+        }
+
+        // Spring Dampening Back to Base Origin
+        n.vx += (n.baseX - n.x) * 0.05;
+        n.vy += (n.baseY - n.y) * 0.05;
+        n.vx *= 0.85;
+        n.vy *= 0.85;
+
+        n.x += n.vx;
+        n.y += n.vy;
+
+        // Render Stress Color Spectrum based on Displacement Magnitude
+        const displacement = Math.sqrt((n.x - n.baseX) ** 2 + (n.y - n.baseY) ** 2);
+        const stressRatio = Math.min(displacement / 25, 1);
+
+        feaCtx.beginPath();
+        feaCtx.arc(n.x, n.y, 2 + stressRatio * 3, 0, Math.PI * 2);
+
+        if (stressRatio > 0.4) {
+          feaCtx.fillStyle = `rgba(244, 63, 94, ${0.4 + stressRatio * 0.6})`; // FEA High Stress Red
+        } else if (stressRatio > 0.1) {
+          feaCtx.fillStyle = `rgba(234, 179, 8, ${0.3 + stressRatio * 0.5})`; // Yielding Yellow
+        } else {
+          feaCtx.fillStyle = `rgba(6, 182, 212, 0.25)`; // Base Structural Cyan
+        }
+        feaCtx.fill();
+      }
+
+      requestAnimationFrame(renderFEA);
+    }
+    renderFEA();
+
+    /* -------------------------------------------------------------
+       2. INTERACTIVE 3D EXPLODED CAD ASSEMBLY ENGINE
+       ------------------------------------------------------------- */
+    const cadCanvas = document.getElementById('cad-viewport');
+    const cadCtx = cadCanvas.getContext('2d');
+    let explodeFactor = 0;
+
+    document.getElementById('explode-slider').addEventListener('input', (e) => {
+      explodeFactor = e.target.value / 100;
+    });
+
+    let angleX = 0.5;
+    let angleY = 0.5;
+
+    function render3DCAD() {
+      const w = cadCanvas.width = cadCanvas.clientWidth;
+      const h = cadCanvas.height = cadCanvas.clientHeight;
+      cadCtx.clearRect(0, 0, w, h);
+
+      angleY += 0.008;
+
+      // Render Explodable Mechanical Assembly Plates
+      const layers = [
+        { zOffset: -60, color: '#06b6d4', label: 'FLANGE BASE' },
+        { zOffset: -20, color: '#38bdf8', label: 'BEARING HOUSING' },
+        { zOffset: 20, color: '#f43f5e', label: 'ROTOR DISC' },
+        { zOffset: 60, color: '#10b981', label: 'RETAINING CAP' }
+      ];
+
+      cadCtx.save();
+      cadCtx.translate(w / 2, h / 2);
+
+      layers.forEach((layer) => {
+        const currentZ = layer.zOffset * (1 + explodeFactor * 1.5);
+        
+        // 3D Isometric Math Projection
+        const cosY = Math.cos(angleY), sinY = Math.sin(angleY);
+        const cosX = Math.cos(angleX), sinX = Math.sin(angleX);
+
+        const radius = 35;
+        cadCtx.strokeStyle = layer.color;
+        cadCtx.lineWidth = 1.5;
+
+        cadCtx.beginPath();
+        for (let a = 0; a <= Math.PI * 2; a += 0.2) {
+          let px = Math.cos(a) * radius;
+          let py = Math.sin(a) * radius;
+          let pz = currentZ;
+
+          // Rotation Y
+          let rx = px * cosY + pz * sinY;
+          let rz = -px * sinY + pz * cosY;
+
+          // Rotation X
+          let ry = py * cosX - rz * sinX;
+
+          if (a === 0) cadCtx.moveTo(rx, ry);
+          else cadCtx.lineTo(rx, ry);
+        }
+        cadCtx.closePath();
+        cadCtx.stroke();
+
+        // Crosshair Centerlines on 3D Layers
+        cadCtx.beginPath();
+        cadCtx.arc(0, currentZ * sinX * 0.3, 3, 0, Math.PI * 2);
+        cadCtx.fillStyle = layer.color;
+        cadCtx.fill();
+      });
+
+      cadCtx.restore();
+      requestAnimationFrame(render3DCAD);
+    }
+    render3DCAD();
+
+    /* -------------------------------------------------------------
+       3. PORTFOLIO UI NAVIGATION & MEDIA CONTROLS
+       ------------------------------------------------------------- */
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active', 'border-blue-500', 'text-blue-400');
-        btn.classList.add('border-transparent', 'text-slate-400');
+        btn.classList.remove('active', 'border-cyan-500', 'bg-cyan-950/60', 'text-cyan-300', 'font-semibold');
+        btn.classList.add('border-slate-800', 'bg-slate-900/60', 'text-slate-400');
       });
 
       const selectedTab = document.getElementById(`tab-${tabId}`);
@@ -311,12 +561,11 @@
 
       if (selectedTab && selectedBtn) {
         selectedTab.classList.add('active');
-        selectedBtn.classList.add('active', 'border-blue-500', 'text-blue-400');
-        selectedBtn.classList.remove('border-transparent', 'text-slate-400');
+        selectedBtn.classList.add('active', 'border-cyan-500', 'bg-cyan-950/60', 'text-cyan-300', 'font-semibold');
+        selectedBtn.classList.remove('border-slate-800', 'bg-slate-900/60', 'text-slate-400');
       }
     }
 
-    /* Accordion Toggle */
     function toggleSkill(card) {
       const isExpanded = card.classList.contains('expanded');
       document.querySelectorAll('.skill-card').forEach(c => c.classList.remove('expanded'));
@@ -325,7 +574,6 @@
       }
     }
 
-    /* Local Photo Reader */
     document.addEventListener("DOMContentLoaded", () => {
       const photoUpload = document.getElementById("photo-upload");
       const profileImg = document.getElementById("profile-img");
